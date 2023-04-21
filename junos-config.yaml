@@ -1,0 +1,27 @@
+# Note: indendentation is important
+# Verify formatting here: https://yaml-online-parser.appspot.com/
+
+# This file contains configuration information for the junos plugin
+
+config:
+  webhook_secret: 'Password00'
+  auth_header: 'Junos-Auth'
+  sql_table: 'junos_events'
+  chat_id: '19:847516a419864851b24cb9f7e8a6426b@thread.v2'
+  ftp_server: 'adm-tftp01'
+  ftp_dir: "backups"
+
+# Syslog events on devices
+events:
+  DH_SVC_SENDMSG_FAILURE: 2
+  LACP_INTF_MUX_STATE_CHANGED: 3
+  LICENSE_EXPIRED_KEY_DELETED: 2
+  SYSTEM_ABNORMAL_SHUTDOWN: 1
+  TOPO_CH: 2
+  UI_COMMIT: 2
+  UI_COMMIT_NOT_CONFIRMED:
+  UI_REBOOT_EVENT: 2
+  UTMD_CF_CONFIG_DEPRECATED: 2
+  ROOT_PORT: 1
+  RTPERF_CPU_THRESHOLD_EXCEEDED: 3
+  RTPERF_CPU_UTIL_MAX: 3
