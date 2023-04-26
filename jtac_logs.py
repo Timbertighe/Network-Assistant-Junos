@@ -375,10 +375,11 @@ def get_rsi(host, chat_id):
     rsi_filename = f'/var/log/RSI-Support-{hostname}-{date}-{time}.txt'
     print(termcolor.colored(f'RSI filename: {rsi_filename}', 'green'))
 
-    # Generate the RSI
+    # Generate the RSI (needs a large timeout)
     result = netconf.send_shell(
         f'request support information | save {rsi_filename}',
-        dev
+        dev,
+        timeout=1800
     )
 
     if not isinstance(result, str):
@@ -581,7 +582,7 @@ def extensive_logs(host, chat_id):
     #   so it should be manually encoded as ASCII
     result = netconf.send_shell(
         (
-            f'{log_filename} {ftp_url}'
+            f'file copy {log_filename} {ftp_url}'
         ),
         dev
     )
