@@ -39,7 +39,15 @@ def junos_connect(host, user, password):
 
 # Send shell commands to the device
 # Take the command to run, as well as the shell object
-def send_shell(cmd, dev):
+def send_shell(cmd, dev, **kwargs):
+    # Check for additional args
+    #   'timeout' is the time to spend waiting for a response
+    #   https://junos-pyez.readthedocs.io/en/2.6.4/jnpr.junos.utils.html#module-jnpr.junos.utils.start_shell
+    if 'timeout' in kwargs:
+        timeout = kwargs['timeout']
+    else:
+        timeout = 60
+
     # Print the command we're going to run
     print(termcolor.colored(cmd, "yellow"))
 
@@ -48,7 +56,7 @@ def send_shell(cmd, dev):
 
     # Connect to the device shell (for sending CLI commands)
     try:
-        shell = StartShell(dev, timeout=60)
+        shell = StartShell(dev, timeout=timeout)
         shell.open()
     except jnpr.junos.exception.ConnectError as err:
         print(termcolor.colored(
